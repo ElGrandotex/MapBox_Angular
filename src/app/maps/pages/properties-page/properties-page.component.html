@@ -13,8 +13,8 @@
         <div *ngFor="let item of houses" class="col-4 mb-2">
 
           <div class="card">
-            <img src="..." alt="" class="card-img-top">
 
+            <app-mini-map [lnglat]="item.lngLat"></app-mini-map>
             <div class="card-body">
               <h5 class="card-title">{{item.title}}</h5>
               <p class="card-text">{{item.description}}</p>
