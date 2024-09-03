@@ -21,7 +21,7 @@ export class MiniMapComponent implements AfterViewInit{
       container: this.divMap?.nativeElement, // container ID
       style: 'mapbox://styles/mapbox/streets-v12', // style URL
       center: this.lnglat, // starting position [lng, lat]
-      zoom: 12, // starting zoom
+      zoom: 13, // starting zoom
       interactive: false
     });
 
