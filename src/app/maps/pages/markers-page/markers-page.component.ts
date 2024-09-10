@@ -16,7 +16,7 @@ interface PlainMarker{
   templateUrl: './markers-page.component.html',
   styleUrl: './markers-page.component.css'
 })
-export class MarkersPageComponent implements AfterViewInit {
+export class MarkersPageComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('map')
   public divMap?: ElementRef;
@@ -38,6 +38,10 @@ export class MarkersPageComponent implements AfterViewInit {
     });
 
     this.readLocalStorage();
+  }
+
+  ngOnDestroy(): void {
+    this.map?.remove();
   }
 
 

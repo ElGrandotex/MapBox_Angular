@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { Map } from 'mapbox-gl';
 
 @Component({
@@ -6,7 +6,9 @@ import { Map } from 'mapbox-gl';
   templateUrl: './full-screen-page.component.html',
   styleUrl: './full-screen-page.component.css'
 })
-export class FullScreenPageComponent implements AfterViewInit{
+export class FullScreenPageComponent implements AfterViewInit, OnDestroy{
+
+  public map?: Map;
 
   @ViewChild('map')
   public divMap?: ElementRef;
@@ -15,7 +17,7 @@ export class FullScreenPageComponent implements AfterViewInit{
 
     if( !this.divMap) throw 'Elemento no encontrado'
 
-    const map = new Map({
+    this.map = new Map({
       container: this.divMap?.nativeElement, // container ID
       style: 'mapbox://styles/mapbox/streets-v12', // style URL
       center: [-78.5, -0.3], // starting position [lng, lat]
@@ -23,4 +25,7 @@ export class FullScreenPageComponent implements AfterViewInit{
     });
   }
 
+  ngOnDestroy(): void {
+    this.map?.remove();
+  }
 }

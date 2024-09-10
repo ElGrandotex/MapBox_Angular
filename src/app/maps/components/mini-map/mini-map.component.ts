@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
 import { Map, Marker } from 'mapbox-gl';
 
 @Component({
@@ -6,9 +6,14 @@ import { Map, Marker } from 'mapbox-gl';
   templateUrl: './mini-map.component.html',
   styleUrl: './mini-map.component.css'
 })
-export class MiniMapComponent implements AfterViewInit{
+export class MiniMapComponent implements AfterViewInit, OnDestroy{
+  ngOnDestroy(): void {
+    this.map?.remove();
+  }
 
   @Input() lnglat?: [number, number];
+
+  public map?: Map;
 
   @ViewChild('map')
   public divMap?: ElementRef;
